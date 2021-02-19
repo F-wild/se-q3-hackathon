@@ -18,6 +18,7 @@ def get_token():
 token = get_token()
 headers={'X-Auth-Token': '{}'.format(token)}
 
+# Get device information given device IP
 def get_dev(device_ip):
     response = requests.get(
         BASE_URL + 'dna/intent/api/v1/network-device/ip-address/{}'.format(device_ip),
@@ -29,6 +30,7 @@ def get_dev(device_ip):
 #test = get_dev('10.10.20.81')
 #print(test)
 
+# Get site health and print for each site
 def get_site_health():
     response = requests.get(
         BASE_URL + 'dna/intent/api/v1/site-health',
@@ -38,9 +40,9 @@ def get_site_health():
     for site in response.json()['response']:
         print('Site: {0}, Health: {1}'.format(site['siteName'], site['networkHealthAverage']))
     return response.json()
-
 #test = get_site_health()
 
+# Get network heatlh and print score AND count for good and bad
 def get_net_health():
     response = requests.get(
         BASE_URL + 'dna/intent/api/v1/network-health',
@@ -51,6 +53,7 @@ def get_net_health():
     print('Good: {0}, Bad: {1}, Health score: {2}'.format(network_health[0]['goodCount'], network_health[0]['badCount'], network_health[0]['healthScore']))
 #test = get_net_health()
 
+# Get client health data
 def get_client_health():
     response = requests.get(
         BASE_URL + 'dna/intent/api/v1/client-health',
@@ -59,12 +62,12 @@ def get_client_health():
     )
     clients_health = response.json()
     return clients_health
-
 #test = get_client_health()
 #print(test['response'][0]['scoreDetail'])
 
+# Print detail of client health for Wired and Wireless clients 
+# (how many clients are good/poor)
 test2 = get_client_health()['response'][0]['scoreDetail']
-
 for i in test2:
     print(i['scoreCategory']['value'] + ': ' + str(i['scoreValue']))
     if i['scoreCategory']['value'] != "ALL":
