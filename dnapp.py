@@ -15,8 +15,8 @@ def get_token():
     data = token.json()
     return data['Token']
 
-token = get_token()
-headers={'X-Auth-Token': '{}'.format(token)}
+#token = get_token()
+#headers={'X-Auth-Token': '{}'.format(token)}
 
 # Get device information given device IP
 def get_dev(device_ip):
@@ -31,10 +31,10 @@ def get_dev(device_ip):
 #print(test)
 
 # Get site health and print for each site
-def get_site_health():
+def get_site_health(hdrs):
     response = requests.get(
         BASE_URL + 'dna/intent/api/v1/site-health',
-        headers=headers,
+        headers=hdrs,
         verify=False
     )
     for site in response.json()['response']:
@@ -43,10 +43,10 @@ def get_site_health():
 #test = get_site_health()
 
 # Get network heatlh and print score AND count for good and bad
-def get_net_health():
+def get_net_health(hdrs):
     response = requests.get(
         BASE_URL + 'dna/intent/api/v1/network-health',
-        headers=headers,
+        headers=hdrs,
         verify=False
     )
     network_health = response.json()['response']
@@ -54,10 +54,10 @@ def get_net_health():
 #test = get_net_health()
 
 # Get client health data
-def get_client_health():
+def get_client_health(hdrs):
     response = requests.get(
         BASE_URL + 'dna/intent/api/v1/client-health',
-        headers = headers, 
+        headers = hdrs, 
         verify = False
     )
     clients_health = response.json()
@@ -67,10 +67,14 @@ def get_client_health():
 
 # Print detail of client health for Wired and Wireless clients 
 # (how many clients are good/poor)
-test2 = get_client_health()['response'][0]['scoreDetail']
-for i in test2:
-    print(i['scoreCategory']['value'] + ': ' + str(i['scoreValue']))
-    if i['scoreCategory']['value'] != "ALL":
-        print("   Detail:")
-        for j in i['scoreList']:
-            print('   ' * 2 + 'Category ' + str(j['scoreCategory']['value']) + ': ' + str(j['clientCount']) + ' clients.')
+def format_client_health(healthjson):
+    #sorry the var names are gibberish
+    test2 = healthjson['response'][0]['scoreDetail']
+    for i in test2:
+        print(i['scoreCategory']['value'] + ': ' + str(i['scoreValue']))
+        if i['scoreCategory']['value'] != "ALL":
+            print("   Detail:")
+            for j in i['scoreList']:
+                print('   ' * 2 + 'Category ' + str(j['scoreCategory']['value']) + ': ' + str(j['clientCount']) + ' clients.')
+
+#test = format_client_health(get_client_health())
