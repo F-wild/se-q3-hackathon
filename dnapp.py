@@ -1,6 +1,7 @@
 import requests
 from requests.auth import HTTPBasicAuth
 import json
+from myvariables import *
 
 # Shut up the warnings
 # IMPORTANT - DO NOT DO THIS IN A PRODUCTION ENVIRONMENT - VERIFY THE TOKENS
@@ -13,7 +14,7 @@ BASE_URL = 'https://sandboxdnac2.cisco.com/'
 def get_token():
     token = requests.post(
         BASE_URL + 'dna/system/api/v1/auth/token',
-        auth = HTTPBasicAuth('devnetuser', 'Cisco123!'),
+        auth = HTTPBasicAuth(USER, PASSWORD),
         headers={'content-type': 'application/json'},
         verify=False
     )
