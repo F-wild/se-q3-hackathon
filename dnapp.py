@@ -2,6 +2,11 @@ import requests
 from requests.auth import HTTPBasicAuth
 import json
 
+# Shut up the warnings
+# IMPORTANT - DO NOT DO THIS IN A PRODUCTION ENVIRONMENT - VERIFY THE TOKENS
+import urllib3
+urllib3.disable_warnings()
+
 BASE_URL = 'https://sandboxdnac2.cisco.com/'
 
 # Get auth token from dnac sandbox using basic auth
