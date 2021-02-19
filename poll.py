@@ -17,7 +17,7 @@ print('\n\n\x1b[0;30;41m' + 'Press ctrl+C (^C) to stop.' + '\x1b[0m\n\n')
 
 # Get initial client health info
 previous = dnapp.get_client_health(headers)
-print(dnapp.format_client_health(previous))
+dnapp.format_client_health(previous)
 
 # poll dnac every 5 seconds, print whether client health is
 # 'same' as last time (30 seconds ago) or 'not same'.
@@ -27,7 +27,7 @@ def main ():
         current = dnapp.get_client_health(headers)
         if tests(current, previous) == False:
             print('Not Same.')
-            print(dnapp.format_client_health(current))
+            dnapp.format_client_health(current)
             current = previous
         else:
             print('Same.')
