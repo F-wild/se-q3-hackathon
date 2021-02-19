@@ -1,6 +1,7 @@
 import requests
 from requests.auth import HTTPBasicAuth
 import json
+# Store USER and PASSWORD in local file named myvariables.py
 from myvariables import *
 
 # Shut up the warnings
