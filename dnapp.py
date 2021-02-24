@@ -9,7 +9,7 @@ from myvariables import *
 import urllib3
 urllib3.disable_warnings()
 
-BASE_URL = 'https://sandboxdnac2.cisco.com/'
+BASE_URL = 'https://sandboxdnac.cisco.com/'
 
 # Get auth token from dnac sandbox using basic auth
 def get_token():
