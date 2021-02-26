@@ -4,7 +4,7 @@ import dnapp
 from time import sleep
 
 # constant variables
-BASE_URL = 'https://sandboxdnac2.cisco.com/'
+#BASE_URL = 'https://sandboxdnac2.cisco.com/'
 
 # Acquire access token
 token = dnapp.get_token()
